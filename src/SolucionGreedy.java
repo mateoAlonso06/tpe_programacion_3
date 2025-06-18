@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class SolucionGreedy {
     private List<Maquina> maquinasDisponibles;
@@ -11,8 +9,6 @@ public class SolucionGreedy {
         this.cantidadPiezas = cantidadPiezas;
     }
 
-    // TODO : poner estrategia y comentarios solicitados
-
     public Solucion getSolucion() {
         return greedy();
     }
@@ -20,6 +16,31 @@ public class SolucionGreedy {
     public int getCantidadCandidatos() {
         return this.maquinasDisponibles.size();
     }
+
+    /**
+     * Estrategia Greedy para producción exacta de piezas:
+     *
+     * - Candidatos:
+     *     · Todas las máquinas disponibles, cada una con una capacidad fija de producción.
+     *
+     * - Estrategia de selección:
+     *     1. Ordenar la lista de máquinas de mayor a menor capacidad.
+     *     2. Recorrerla desde la de mayor capacidad a la de menor:
+     *         • Si la máquina cabe en el remanente (suma_actual + capacidad ≤ objetivo),
+     *           la añadimos a la solución y volvemos a intentar con la misma máquina
+     *           (permitiendo reutilización ilimitada).
+     *         • Si no cabe, avanzamos al siguiente candidato de menor capacidad.
+     *
+     * - Criterio de parada:
+     *     · Se detiene al alcanzar exactamente la cantidad de piezas deseada.
+     *     · O al agotar los candidatos sin poder llegar al objetivo.
+     *
+     * - Consideraciones:
+     *     · Complejidad: O(n log n) por la ordenación + O(n) en el bucle de selección.
+     *     · No garantiza encontrar la solución con menor número de máquinas
+     *       salvo que las capacidades formen un sistema “canonizable”.
+     *     · Devuelve null si no se encuentra combinación exacta.
+     */
 
     private Solucion greedy() {
         Solucion solucion = new Solucion();
@@ -59,6 +80,11 @@ class Solucion {
     public Solucion() {
         this.secuenciaMaquinas = new ArrayList<>();
         this.cantidadPiezasProducidas = 0;
+    }
+
+    public int getCantidadMaquinasUsadas() {
+        Set<Maquina> maquinas = new HashSet<>(secuenciaMaquinas);
+        return maquinas.size();
     }
 
     public List<Maquina> getSecuenciaMaquinas() {

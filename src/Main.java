@@ -9,7 +9,7 @@ public class Main {
         // 1) Archivo en la raíz del proyecto
         String rutaFichero = "maquinas.txt";
 
-        // 2) Estructuras donde volcar la info
+        // 2) Estructuras donde guardar la info
         int cantidadPiezasObjetivo = 0;
         List<Maquina> maquinas = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class Main {
                 }
                 String nombre = partes[0].trim();
                 int capacidad = Integer.parseInt(partes[1].trim());
-                // Nota: el constructor de Maquina es Maquina(int capacidad, String nombre)
+
                 maquinas.add(new Maquina(capacidad, nombre));
             }
         } catch (IOException | NumberFormatException ex) {
@@ -46,8 +46,8 @@ public class Main {
         SolucionBacktracking solucionBacktracking = new SolucionBacktracking(maquinas, cantidadPiezasObjetivo);
         System.out.println("Backtracking");
         System.out.println("Secuencia de maquinas: " + solucionBacktracking.getSecuenciaMaquinas());
-        System.out.print("Cantidad de piezas producidas: " + cantidadPiezasObjetivo + "\t"); // preguntar si esto hacerlo de forma local en cada solucion
-        System.out.println("Cantidad de maquinas usadas: " + solucionBacktracking.getCantidadMaquinasUsadas()); // es el total de veces que se usaron las maquinas o la cantidad de maquinas total independientemente de cuantas veces se usaron
+        System.out.print("Cantidad de piezas producidas: " + solucionBacktracking.getCantidadPiezasProducidas() + "\t"); // preguntar si esto hacerlo de forma local en cada solucion
+        System.out.println("Cantidad de maquinas usadas: " + solucionBacktracking.getCantidadMaquinasUsadas());
         System.out.println("Estados generados: " + solucionBacktracking.getEstadosGenerados());
 
         System.out.println();
@@ -56,8 +56,8 @@ public class Main {
         Solucion solucion = resolucionGreedy.getSolucion();
         System.out.println("Greedy");
         System.out.println("Secuencia de maquinas: " + solucion.getSecuenciaMaquinas());
-        System.out.print("Cantidad de piezas producidas: " + cantidadPiezasObjetivo + "\t");
-        System.out.println("Cantidad de maquinas usadas: " + solucion.getSecuenciaMaquinas().size()); // es el total de veces que se usaron las maquinas o la cantidad de maquinas total independientemente de cuantas veces se usaron
+        System.out.print("Cantidad de piezas producidas: " + solucion.getCantidadPiezasProducidas() + "\t");
+        System.out.println("Cantidad de maquinas usadas: " + solucion.getCantidadMaquinasUsadas());
         System.out.println("Cantidad de candidatos considerados: " + resolucionGreedy.getCantidadCandidatos());
     }
 }

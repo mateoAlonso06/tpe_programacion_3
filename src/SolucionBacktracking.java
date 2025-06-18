@@ -5,12 +5,14 @@ public class SolucionBacktracking {
     private final List<Maquina> maquinasEnFuncionamiento;
     private final int cantidadPiezas;
     private int estadosGenerados;
+    private int cantidadPiezasProducidas;
 
     public SolucionBacktracking(List<Maquina> maquinasDisponibles, int cantidadPiezas) {
         this.maquinasDisponibles = maquinasDisponibles;
         this.cantidadPiezas = cantidadPiezas;
         this.maquinasEnFuncionamiento = new ArrayList<>();
         this.estadosGenerados = 0;
+        this.cantidadPiezasProducidas = 0;
     }
 
     /*
@@ -70,7 +72,6 @@ public class SolucionBacktracking {
     public List<Maquina> getSecuenciaMaquinas() {
         Estado e = new Estado();
         backtracking(e, 0);
-
         return this.maquinasEnFuncionamiento;
     }
 
@@ -79,12 +80,17 @@ public class SolucionBacktracking {
         return maquinas.size();
     }
 
+    public int getCantidadPiezasProducidas() {
+        return this.cantidadPiezasProducidas;
+    }
+
     private void backtracking(Estado e, int comienzo) {
         estadosGenerados++;
         if (e.getCantidadPiezasProducidas() == this.cantidadPiezas) {
             if (esSolucion(e)) {
                 this.maquinasEnFuncionamiento.clear();
                 this.maquinasEnFuncionamiento.addAll(e.getMaquinasEnFuncionamientoActual());
+                this.cantidadPiezasProducidas = e.getCantidadPiezasProducidas();
             }
             return;
         }
