@@ -15,44 +15,28 @@ public class SolucionBacktracking {
 
     /*
      * Estrategia Backtracking:
-     * Al comienzo tenemos n maquinas y se comienza poniendo en funcionamiento la primera disponible y vamos probando todos los posibles estados
-     * guardando asi la cantidad de piezas producidas hasta ese momento y permitiendonos encontrar una poda en los casos en los que la cantidad de piezas
+     * Al comienzo tenemos n maquinas y se comienza poniendo en funcionamiento la primera disponible y vamos probando todos los posibles estados:
+     * guardando asi la cantidad de estados generados y la cantidad de piezas producidas hasta ese momento y permitiendonos encontrar una poda en los casos en los que la cantidad de piezas
      * generadas hasta ese momento más la que pueda producir la maquina seleccionada se pasa de la cantidad de piezas totales a producir (12 en este caso)
-     * y evitando asi generar estadoos innecesarios
+     * y evitando asi generar estadoos innecesarios. Esto en el arbol se ve graficado con una x en los casos de poda.
      *
+     * Ademas a la hora de armar el árbol, el algoritmo, una vez selecciona y pone en funcionamiento una maquina, prueba todos los estados posibles con ella, haciendo que
+     * luego, no se formen estados/permutaciones redundantes (Como por ejemplo, la secuencia: [M1, M3, M4] es la misma que la secuencia: [M3,M4,M1]).
      *
+     * A la hora de encontrar una posible solución (cantidad de piezas generadas = 12), en el caso de ser la primer opción, esta quedara guardada como la mejor, pero en el
+     * caso de encontrar mas posibles estados solucion, el algoritmo compara la cantidad de piezas puestas en funcionamiento, guardando la que menor cantidad de maquinas
+     * en funcionamiento tenga. En caso de tener una solución con mayor o igual cantidad de maquinas en funcionamiento, quedara la solucion ya guardada.
      *
-     * Estrategia Backtracking para producción exacta de piezas:
+     * Posibles estados solución:
+     * [M1, M3, M4]
+     * [M3, M3, M3]
+     * [M1, M2, M4,M4]
+     * [M1, M1, M1, M1, M1, M1, M1, M1, M1, M1, M1, M1,]
      *
-     *  - Generación del árbol de búsqueda:
-     *     · A la hora de  probar añadir una máquina de una lista de maquinas disponibles a partir del índice ‘start’, lo que evita permutaciones redundantes.
-     *
-     * - Estado:
-     *     · Secuencia de máquinas en funcionamiento.
-     *     · Suma actual de piezas producidas.
-     *
-     * - Caso solución:
-     *     · La suma de piezas producidas == objetivo (p. ej. 12 piezas).
-     *
-     * - Podas:
-     *     1) Exceso de piezas: si suma_actual + capacidad_máquina > objetivo, se descarta
-     *        esa rama (continue).
-     *     2) Profundidad no óptima: si número_de_máquinas_usadas + 1 ≥ mejor_solución_conocida,
-     *        se omite la rama para no empeorar la mejor solución.
-     *
-     * - Optimización adicional:
-     *     · Se almacena en todo momento la mejor solución (la que usa menos máquinas) y
-     *       se compara al encontrar cada solución candidata.
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
-     *
+     * Estados podados:
+     * [M1, M1]
+     * [M1,M2, M3]
+     * [M1, M3,M3]
      *
      *
      *
