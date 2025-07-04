@@ -34,6 +34,7 @@ public class SolucionGreedy {
 
 */
     public Solucion getSolucion() {
+        // TODO: ¿HACER IF DE COMPROBACION Y DEVOLVER?
         return greedy();
     }
 
@@ -82,8 +83,7 @@ class Solucion {
     }
 
     public int getCantidadMaquinasUsadas() {
-        Set<Maquina> maquinas = new HashSet<>(secuenciaMaquinas);
-        return maquinas.size();
+        return secuenciaMaquinas.size();
     }
 
     public List<Maquina> getSecuenciaMaquinas() {

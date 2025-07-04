@@ -39,10 +39,7 @@ public class SolucionBacktracking {
      * [M1, M1]
      * [M1,M2, M3]
      * [M1, M3,M3]
-     *
-     *
-     *
-     *
+
      *  - Estado: (secuencia de máquinas, suma_actual)
      *  - Genero hijos probando cada máquina M:
      *      si suma_actual + M.piezas <= total:
@@ -60,8 +57,7 @@ public class SolucionBacktracking {
     }
 
     public int getCantidadMaquinasUsadas() {
-        Set<Maquina> maquinas = new HashSet<>(getSecuenciaMaquinas());
-        return maquinas.size();
+        return maquinasEnFuncionamiento.size();
     }
 
     public int getCantidadPiezasProducidas() {
@@ -76,23 +72,29 @@ public class SolucionBacktracking {
                 this.maquinasEnFuncionamiento.addAll(e.getMaquinasEnFuncionamientoActual());
                 this.cantidadPiezasProducidas = e.getCantidadPiezasProducidas();
             }
-            return;
         }
+        else {
+            for (int i = comienzo; i < this.maquinasDisponibles.size(); i++) {
+                Maquina m = maquinasDisponibles.get(i);
 
-        for (int i = comienzo; i < this.maquinasDisponibles.size(); i++) {
-            Maquina m = maquinasDisponibles.get(i);
-            if (e.getCantidadPiezasProducidas() + m.getCapacidadDeProduccion() > cantidadPiezas) {
-                continue;
+                int actuales = e.getCantidadPiezasProducidas();
+                int sumaConEstaMaquina = actuales + m.getCapacidadDeProduccion();
+                int usadasHastaAhora = e.cantidadMaquinasEnFuncionamiento();
+
+                boolean puedoMejorarEnNumero = maquinasEnFuncionamiento.isEmpty()
+                        || (usadasHastaAhora + 1 < maquinasEnFuncionamiento.size());
+
+                if (sumaConEstaMaquina <= cantidadPiezas && puedoMejorarEnNumero) {
+                    e.ponerEnFuncionamiento(m);
+                    backtracking(e, i);
+                    e.quitarDeFuncionamiento(m);
+                }
             }
-
-            e.ponerEnFuncionamiento(m);
-            backtracking(e, i);
-            e.quitarDeFuncionamiento(m);
         }
     }
 
     public int getEstadosGenerados() {
-        return estadosGenerados;
+        return this.estadosGenerados;
     }
 
     private boolean esSolucion(Estado e) {
