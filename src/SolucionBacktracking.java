@@ -84,10 +84,14 @@ public class SolucionBacktracking {
                 boolean puedoMejorarEnNumero = maquinasEnFuncionamiento.isEmpty()
                         || (usadasHastaAhora + 1 < maquinasEnFuncionamiento.size());
 
+<<<<<<< HEAD
                 boolean verificarCapacidadNoNula = m.getCapacidadDeProduccion() > 0;
 
                 if (sumaConEstaMaquina <= cantidadPiezas && puedoMejorarEnNumero
                     && verificarCapacidadNoNula) {
+=======
+                if (sumaConEstaMaquina <= cantidadPiezas && puedoMejorarEnNumero) {
+>>>>>>> 74759ed1da6e4e0f6aad093e57889d92148ff932
                     e.ponerEnFuncionamiento(m);
                     backtracking(e, i);
                     e.quitarDeFuncionamiento(m);
