@@ -27,11 +27,7 @@ public class Maquina implements Comparable<Maquina> {
 
     @Override
     public String toString() {
-<<<<<<< HEAD
         return this.getNombre() + "(" + this.getCapacidadDeProduccion()+")";
-=======
-        return this.getNombre() + ", " + this.getCapacidadDeProduccion();
->>>>>>> 74759ed1da6e4e0f6aad093e57889d92148ff932
     }
 
     @Override

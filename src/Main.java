@@ -18,9 +18,8 @@ public class Main {
 
         // Prueba con backtracking
         SolucionBacktracking sb = new SolucionBacktracking(maquinas, cantidadPiezasObjetivo);
-<<<<<<< HEAD
-
         System.out.println("Backtracking");
+
         if (sb != null) {
             System.out.println("Secuencia de máquinas: " + sb.getSecuenciaMaquinas());
             System.out.println("Piezas producidas: " + sb.getCantidadPiezasProducidas()
@@ -29,14 +28,7 @@ public class Main {
         } else {
             System.out.println("no hay solucion");
         }
-=======
-        System.out.println("Backtracking");
-        System.out.println("Secuencia de máquinas: " + sb.getSecuenciaMaquinas());
-        System.out.println("Piezas producidas: " + sb.getCantidadPiezasProducidas()
-                           + "   Puestas en marcha: " + sb.getCantidadMaquinasUsadas()
-                           + "   Estados generados: " + sb.getEstadosGenerados());
-        
->>>>>>> 74759ed1da6e4e0f6aad093e57889d92148ff932
+
         System.out.println();
 
         // Prueba con greedy
@@ -44,10 +36,7 @@ public class Main {
         Solucion sol = sg.getSolucion();
 
         System.out.println("Greedy");
-<<<<<<< HEAD
 
-=======
->>>>>>> 74759ed1da6e4e0f6aad093e57889d92148ff932
         if (sol != null) {
             System.out.println("Secuencia de máquinas: " + sol.getSecuenciaMaquinas());
             System.out.println("Piezas producidas: " + sol.getCantidadPiezasProducidas()
