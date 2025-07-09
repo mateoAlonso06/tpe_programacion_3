@@ -88,9 +88,6 @@ public class SolucionBacktracking {
 
                 if (sumaConEstaMaquina <= cantidadPiezas && puedoMejorarEnNumero
                     && verificarCapacidadNoNula) {
-
-                }
-                if (sumaConEstaMaquina <= cantidadPiezas && puedoMejorarEnNumero) {
                     e.ponerEnFuncionamiento(m);
                     backtracking(e, i);
                     e.quitarDeFuncionamiento(m);
